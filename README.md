@@ -55,10 +55,33 @@ OUTPUT_DIR = "exports"
   },
 ```
 
-
 ## call_attention.py说明
 
+- 报警的示例内容可见附录所示。
 
+## 其他说明
+
+- .env目前配置如下，后期可按照需求自行修改。
+```bash
+ALARM_API_BASE=https://ares.airudder.com/
+ALARM_LEVEL=3
+ALARM_USERNAME=linda.xie
+ALARM_SUPERVISOR=linda.xie
+ALARM_WEBHOOK=NotifyOnlyUser
+ALARM_RECEIVER_TYPE=user
+ALARM_BODY_TAG=plain_text
+ALARM_DEPARTMENT=
+ALARM_PHONE=
+ALARM_SUPERVISOR_PHONE=
+```
+- 各个.csv文件可自行修改维护。
+- 目前各个代码已更新在云端服务器——flume001.aliyun-hk.airudderint.com，主机名172.20.207.75（未添加crontab自动执行脚本计划）
+
+## 未来可能修改发展方向
+
+- 目前模型可以来的话术模板verbal_template较少，可后期增加丰富程度。
+- 目前模型可依赖的基本表需要扩充修改。
+- 目前模型无法读取往期记忆，但是我在json中已标明各个文件日期，后续可修改为读取往期报告和真实数据得出结论。
 
 ## 附录一
 - 各基本表抓取逻辑如下：
