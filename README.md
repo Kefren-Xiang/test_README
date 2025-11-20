@@ -2,13 +2,13 @@
 
 ## 流程简介
 
-    - 一共是三个主要文件：dump_stats.py负责每日抓取最新数据(跨度范围 一个月 )，analyze_with_bailian.py负责将数据和prompt交给百炼api返回analysis_results_XXXX-XX-XX.json，call_attention负责根据json内容和实际数据情况发送飞书报警
-    - 其他文件说明：.env负责相关配置，company.csv负责选取调查公司范围（配置时请注明国家与公司名）dump_stats会从company.csv中找到需要调查的共公司范围，Terminology_explanation.csv是一个辅助文件，用于将原表格中部分不符合规范的术语转义，例如qc_num指的是去重量，verbal_template.csv是从日常巡检手册中的常用报告提炼而来，用于引导LLM回答问题。
+- 一共是三个主要文件：dump_stats.py负责每日抓取最新数据(跨度范围 一个月 )，analyze_with_bailian.py负责将数据和prompt交给百炼api返回analysis_results_XXXX-XX-XX.json，call_attention负责根据json内容和实际数据情况发送飞书报警
+- 其他文件说明：.env负责相关配置，company.csv负责选取调查公司范围（配置时请注明国家与公司名）dump_stats会从company.csv中找到需要调查的共公司范围，Terminology_explanation.csv是一个辅助文件，用于将原表格中部分不符合规范的术语转义，例如qc_num指的是去重量，verbal_template.csv是从日常巡检手册中的常用报告提炼而来，用于引导LLM回答问题。
 
 ## 操作手册
 
-    - 我在每个程序中留了一个可自定义变量target_date，可用于追踪选定的日期。
-    - 默认启动方式如下：
+- 我在每个程序中留了一个可自定义变量target_date，可用于追踪选定的日期。
+- 默认启动方式如下：
 ```bash
 python dump_stats.py
 
@@ -16,7 +16,7 @@ python analyze_with_bailian.py
 
 python call_attention.py
 ```
-    - 选定日期target_date指的是分析日期，例如要选取的数据范围是2025-10-30 ~ 2025-11-30，则target_date=2025-11-30，具体方式如下：
+- 选定日期target_date指的是分析日期，例如要选取的数据范围是2025-10-30 ~ 2025-11-30，则target_date=2025-11-30，具体方式如下：
 ```bash
 python dump_stats.py --target_date=YYYY-MM-DD
 
@@ -24,13 +24,13 @@ python analyze_with_bailian.py --target_date=YYYY-MM-DD
 
 python call_attention.py --target_date=YYYY-MM-DD
 ```
-    - 注：不建议三个脚本分开太长时间运行，综合考虑存储和记录影响，分析结果以json形式分开储存（analysis_results_YYYY-MM-DD.json），但是数据脚本覆盖储存。
+- 注：不建议三个脚本分开太长时间运行，综合考虑存储和记录影响，分析结果以json形式分开储存（analysis_results_YYYY-MM-DD.json），但是数据脚本覆盖储存。
 
 ## dump_stats.py说明
 
-    - 目前一共选取了四张基本表——oss_ba.linda_company_day_static_v1，oss_ba.linda_sipline_data，oss_ba.linda_wf_tmp_dpd_company_day_v2，oss_ba.linda_wf_tmp_dpd_company_day_v2（具体sql语言见附一）
-    - 基本表涵盖内容包括：公司整体各指标，账龄分布情况，各条线路情况，preg情况。从日常巡检角度来看基本覆盖主要影响范围，后期如果有其他需要附加，可届时再添加内容。
-    - 当前dump_stats.py存在问题：目前我调用的全部为linda表，数据更新速度慢（每日9:30——10:00拿不到需求数据），调用其他表以我个人账号而言缺少权限。
+- 目前一共选取了四张基本表——oss_ba.linda_company_day_static_v1，oss_ba.linda_sipline_data，oss_ba.linda_wf_tmp_dpd_company_day_v2，oss_ba.linda_wf_tmp_dpd_company_day_v2（具体sql语言见附一）
+- 基本表涵盖内容包括：公司整体各指标，账龄分布情况，各条线路情况，preg情况。从日常巡检角度来看基本覆盖主要影响范围，后期如果有其他需要附加，可届时再添加内容。
+- 当前dump_stats.py存在问题：目前我调用的全部为linda表，数据更新速度慢（每日9:30——10:00拿不到需求数据），调用其他表以我个人账号而言缺少权限。
 
 
 
